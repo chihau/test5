@@ -19,7 +19,9 @@ class MainApp extends StatelessWidget {
 }
 
 class Screen1 extends StatelessWidget {
-  const Screen1({super.key});
+  Screen1({super.key});
+
+  var myController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -40,6 +42,7 @@ class Screen1 extends StatelessWidget {
                 ),
                 style: TextStyle(fontSize: 25),
                 textAlign: TextAlign.center,
+                controller: myController,
               ),
               ElevatedButton(
                 onPressed: () {
@@ -47,6 +50,7 @@ class Screen1 extends StatelessWidget {
                     context,
                     MaterialPageRoute(
                       builder: (context) => Screen2(),
+                      settings: RouteSettings(arguments: myController.text),
                     ),
                   );
                 },
@@ -65,9 +69,31 @@ class Screen2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String? nombre = ModalRoute.of(context)?.settings.arguments as String;
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Hola Routes - Screen 2'),
+      ),
+      body: Center(
+        child: Padding(
+          padding: EdgeInsets.all(20),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Hola $nombre',
+                style: TextStyle(fontSize: 25),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Volver'),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
