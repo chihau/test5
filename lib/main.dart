@@ -32,6 +32,10 @@ class MainApp extends StatelessWidget {
                   style: TextStyle(fontSize: 25),
                   textAlign: TextAlign.center,
                 ),
+                ElevatedButton(
+                  onPressed: () {},
+                  child: Text('Ir a Screen2'),
+                ),
               ],
             ),
           ),
